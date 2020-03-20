@@ -1,3 +1,4 @@
 # CSharp
-lab1 - backpack(dynamic programming)\n
+lab1 - backpack(dynamic programming)
+
 lab2_1 - Рассчитать максимальную степень двойки, на которую делится произведение подряд идущих чисел от a до b (числа целые 64-битные без знака).
