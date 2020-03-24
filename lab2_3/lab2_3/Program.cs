@@ -81,7 +81,10 @@ namespace lab2_3
                     parsed += (number[i] - '0') / pow10;
                 }
             }
-            if (number[0] == '-') parsed *= -1;
+            if (number[0] == '-')
+            {
+                parsed *= -1;
+            }
             return parsed;
         }
 

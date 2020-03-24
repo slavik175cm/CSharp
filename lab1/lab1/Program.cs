@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace lab1 {
-    class Program {
-        static void Main(string[] args) {
+namespace lab1 
+{
+    class Program 
+    {
+        static void Main(string[] args) 
+        {
             uint numberOfItems = ReadUInt("Number of items = ");
             uint weightOfBackpack = ReadUInt("Maximum weight of your backpack = ");
             uint[] weight = new uint[numberOfItems];
             double[] value = new double[numberOfItems];
-            for (int i = 0; i < numberOfItems; i++) {
+            for (int i = 0; i < numberOfItems; i++) 
+            {
                 Console.WriteLine("\nEnter item" + (i + 1));
                 weight[i] = ReadUInt("Weight = ");
                 value[i] = ReadDouble("Value = ");
@@ -26,8 +30,10 @@ namespace lab1 {
             else 
             {
                 Console.Write("You need to pick items : ");
-                foreach(var item in ListOfItems)
+                foreach (var item in ListOfItems)
+                {
                     Console.Write(item + " ");
+                }
             }
         }
 
@@ -37,11 +43,16 @@ namespace lab1 {
             //dp[i][j] - maximum total value that we can get from weight j considered only first i items
 
             for (int i = 0; i <= numberOfItems; i++)
+            {
                 for (int j = 0; j <= weightOfBackpack; j++)
+                {
                     dp[i, j] = double.MinValue;
+                }
+            }
             dp[0, 0] = 0;
 
             for (int i = 0; i < numberOfItems; i++)
+            {
                 for (int j = 0; j <= weightOfBackpack; j++)
                 {
                     if (dp[i, j] == double.MinValue) continue;
@@ -49,6 +60,7 @@ namespace lab1 {
                         dp[i + 1, j + weight[i]] = Math.Max(dp[i + 1, j + weight[i]], dp[i, j] + value[i]);
                     dp[i + 1, j] = Math.Max(dp[i + 1, j], dp[i, j]);
                 }
+            }
         }
 
         static List<uint> RestoreAnswer(double[,] dp, uint numberOfItems, uint weightOfBackpack, uint[] weight, out double best)
@@ -58,18 +70,22 @@ namespace lab1 {
             List<uint> ListOfItems = new List<uint>();
 
             for (uint j = 0; j <= weightOfBackpack; j++)
+            {
                 if (dp[numberOfItems, j] > best)
                 {
                     currentweight = j;
                     best = dp[numberOfItems, j];
                 }
+            }
 
             for (uint i = numberOfItems; i > 0; i--)
+            {
                 if (dp[i, currentweight] != dp[i - 1, currentweight])
                 {
                     ListOfItems.Add(i);
                     currentweight -= weight[i - 1];
                 }
+            }
 
             ListOfItems.Reverse();
             return ListOfItems;
