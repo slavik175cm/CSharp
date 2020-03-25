@@ -6,38 +6,36 @@ namespace lab3
 {
     class Vehicle
     {
-        public string serialNumber { get; private set; }
-        public double weight { get; private set; }
-        public double carryingCapacity { get; private set; }
-        public double maxSpeed { get; private set; }
-        public double cost { get; private set; }
-        public DateTime manufacturingTime { get; private set; }
-        public bool isBroken { get; private set; }
-        public uint myid { get; private set; }
-        private static uint id = 0;
+        public string SerialNumber { get; private set; }
+        public double Weight { get; private set; }
+        public double CarryingCapacity { get; private set; }
+        public double MaxSpeed { get; private set; }
+        public double Cost { get; private set; }
+        public double Mileage { get; private set; }
+        public DateTime ManufacturingTime { get; private set; }
+        public bool IsBroken { get; private set; }
+        public uint MyId { get; private set; }
+        public static uint Id = 0;
 
-        public Vehicle(string serialNumber, double weight, double carryingCapacity, double maxSpeed, double cost, bool isBroken = false)
+        public Vehicle(string serialNumber, double weight, double carryingCapacity, double maxSpeed, double cost)
         {
-            this.serialNumber = serialNumber;
-            this.weight = weight;
-            this.carryingCapacity = carryingCapacity;
-            this.maxSpeed = maxSpeed;
-            this.cost = cost;
-            this.manufacturingTime = DateTime.Now;
-            this.isBroken = isBroken;
-            this.myid = ++id;
+            SerialNumber = serialNumber;
+            Weight = weight;
+            CarryingCapacity = carryingCapacity;
+            MaxSpeed = maxSpeed;
+            Cost = cost;
+            Mileage = 0;
+            ManufacturingTime = DateTime.Now;
+            IsBroken = false;
+            MyId = ++Id;
         }
 
-        public Vehicle(string serialNumber, double weight, double carryingCapacity, double maxSpeed, double cost, DateTime manufacturingTime, bool isBroken = false)
+        public Vehicle(string serialNumber, double weight, double carryingCapacity, double maxSpeed, double cost, double mileage, DateTime manufacturingTime, bool isBroken = false)
+            : this(serialNumber, weight, carryingCapacity, maxSpeed, cost)
         {
-            this.serialNumber = serialNumber;
-            this.weight = weight;
-            this.carryingCapacity = carryingCapacity;
-            this.maxSpeed = maxSpeed;
-            this.cost = cost;
-            this.manufacturingTime = manufacturingTime;
-            this.isBroken = isBroken;
-            this.myid = ++id;
+            ManufacturingTime = manufacturingTime;
+            Mileage = mileage;
+            IsBroken = isBroken;
         }
 
         public bool ChangeSerialNumber(string newSerialNumber)
@@ -49,19 +47,50 @@ namespace lab3
                     return false;
                 }
             }
-            serialNumber = newSerialNumber;
+            SerialNumber = newSerialNumber;
             return true;
         }
 
-        public int HowManyYears()
+        public string InfoToString()
         {
-            return DateTime.Now.Year - manufacturingTime.Year;
+            StringBuilder info = new StringBuilder();
+            info.AppendLine("******************************************************");
+            info.AppendLine(String.Format("Id: {0}", MyId));
+            info.AppendLine(String.Format("Serial number: {0}", SerialNumber));
+            info.AppendLine(String.Format("Weight: {0}kg", Weight));
+            info.AppendLine(String.Format("Carrying capacity: {0}kg", CarryingCapacity));
+            info.AppendLine(String.Format("Max speed: {0}m/s", MaxSpeed));
+            info.AppendLine(String.Format("Mileage: {0}m/s", Mileage));
+            info.AppendLine(String.Format("Cost: {0}$", Cost));
+            info.AppendLine(String.Format("Manufacturing time: {0}, {1} year(s)", ManufacturingTime.ToShortDateString(), GetHowManyYears().ToString()));
+            info.AppendLine(IsBroken ? "Vehicle is broken!" : "Vehicle is not broken");
+            return info.ToString();
+        }
+
+        public int GetHowManyYears()
+        {
+            return DateTime.Now.Year - ManufacturingTime.Year;
+        }
+        
+        public void Run()
+        {
+            Mileage++;
+        }
+
+        public void Run(double distance)
+        {
+            Mileage += distance;
         }
 
         public void Repair()
         {
-            isBroken = false;
+            IsBroken = false;
         }
 
+        public void Break()
+        {
+            IsBroken = true;
+        }
+            
     }
 }
