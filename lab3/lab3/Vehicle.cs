@@ -40,7 +40,10 @@ namespace lab3
 
         public bool ChangeSerialNumber(string newSerialNumber)
         {
-            if (newSerialNumber.Length > 20) return false;
+            if (newSerialNumber.Length > 20)
+            {
+                return false;
+            }
             foreach(var ch in newSerialNumber)
             {
                 if ((ch < 'A' || ch > 'Z') && (ch < '0' || ch > '9'))

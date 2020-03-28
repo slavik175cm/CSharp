@@ -26,7 +26,7 @@ namespace lab3
                         break;
                     case 2:
                         Console.Clear();
-                        vehicles[Vehicle.Id + 1] = GetNew();
+                        vehicles[Vehicle.Id + 1] = GetNewVehicle();
                         Console.WriteLine("Vehicle has been added!");
                         doClear = true;
                         break;
@@ -43,7 +43,10 @@ namespace lab3
                         return;
                 }
                 Console.ReadLine();
-                if (doClear) Console.Clear();
+                if (doClear)
+                {
+                    Console.Clear();
+                }
             }
         }
 
@@ -101,7 +104,7 @@ namespace lab3
             }
         }
 
-        static Vehicle GetNew()
+        static Vehicle GetNewVehicle()
         {
             string serialNumber;
             while (true)
@@ -115,7 +118,10 @@ namespace lab3
                     if ((ch < 'A' || ch > 'Z') && (ch < '0' || ch > '9'))
                         ok = false;
                 }
-                if (ok) break;
+                if (ok)
+                {
+                    break;
+                }
                 Console.WriteLine("String should contain up to 20 symbols A-Z and 0-9");
             }
             double weight = ReadDouble("Weight(kg) - ");
@@ -156,7 +162,6 @@ namespace lab3
             DateTime manufacturingTime;
             while (true)
             {
-
                 try
                 {
                     manufacturingTime = new DateTime(Choice(1, 9999, "Year - "), Choice(1, 12, "Mounth - "), Choice(1, 30, "Day - "));
@@ -171,7 +176,6 @@ namespace lab3
                 }
             }
                 return new Vehicle(serialNumber, weight, carryingCapacity, maxSpeed, cost, mileage, manufacturingTime, isBroken);
-
         }
 
         static int ChooseSpecific(Dictionary<int, Vehicle> vehicles)
@@ -254,11 +258,11 @@ namespace lab3
                     if (choice == 1)
                     {
                         vehicles[index].Repair();
-                        Console.WriteLine("it's has been repaired");
+                        Console.WriteLine("it has been repaired");
                         break;
                     }
                     vehicles[index].Break();
-                    Console.WriteLine("it's has been broken");
+                    Console.WriteLine("it has been broken");
                     break;
                 case 4:
                     Console.WriteLine("Nothing has been changed");
