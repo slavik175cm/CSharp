@@ -63,23 +63,11 @@ namespace lab3
             return x;
         }
 
-        static int ReadInt(string s)
-        {
-            int x;
-            Console.Write(s);
-            while (!int.TryParse(Console.ReadLine(), out x))
-            {
-                Console.WriteLine("String is not an integer! Try again");
-                Console.Write(s);
-            }
-            return x;
-        }
-
         static double ReadDouble(string text)
         {
             double x;
             Console.Write(text);
-            while (!double.TryParse(Console.ReadLine().Replace('.', ','), out x))
+            while (!double.TryParse(Console.ReadLine(), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out x))
             {
                 Console.WriteLine("String is not a number! Try again");
                 Console.Write(text);
@@ -92,15 +80,12 @@ namespace lab3
             if (vehicles.Count == 0)
             {
                 Console.WriteLine("There is no vehicles");
+                return;
             } 
-            else
+            foreach (var a in vehicles)
             {
-                foreach (var a in vehicles)
-                {
-                    Console.Write(a.Value.InfoToString());
-                    Console.ReadLine();
-                }
-                Console.WriteLine("That's all of them");
+                Console.Write(a.Value.InfoToString());
+                Console.ReadLine();
             }
         }
 
@@ -112,7 +97,10 @@ namespace lab3
                 bool ok = true;
                 Console.Write("Serial number - ");
                 serialNumber = Console.ReadLine();
-                if (serialNumber.Length > 20) ok = false;
+                if (serialNumber.Length > 20)
+                {
+                    ok = false;
+                }
                 foreach(var ch in serialNumber)
                 {
                     if ((ch < 'A' || ch > 'Z') && (ch < '0' || ch > '9'))
@@ -169,7 +157,7 @@ namespace lab3
                     {
                         break;
                     }
-                    Console.WriteLine("Is the vehicle from the future?");
+                    Console.WriteLine("Is the vehicle from the future??");
                 } catch
                 {
                     Console.WriteLine("Such date is not exist!");
@@ -188,13 +176,10 @@ namespace lab3
                 {
                     return choice;
                 } 
-                else
+                Console.WriteLine("There is no vehicle with such id! Type 'y' to continue...");
+                if (Console.ReadLine().ToLower() != "y")
                 {
-                    Console.WriteLine("There is no vehicle with such id! Type 'y' to continue...");
-                    if (Console.ReadLine().ToLower() != "y")
-                    {
-                        return -1;
-                    }
+                    return -1;
                 }
             }
         }
