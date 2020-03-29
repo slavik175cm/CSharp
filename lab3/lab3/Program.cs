@@ -67,7 +67,7 @@ namespace lab3
         {
             double x;
             Console.Write(text);
-            while (!double.TryParse(Console.ReadLine(), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out x))
+            while (!double.TryParse(Console.ReadLine().Replace('.', ','), out x))
             {
                 Console.WriteLine("String is not a number! Try again");
                 Console.Write(text);
@@ -163,7 +163,7 @@ namespace lab3
                     Console.WriteLine("Such date is not exist!");
                 }
             }
-                return new Vehicle(serialNumber, weight, carryingCapacity, maxSpeed, cost, mileage, manufacturingTime, isBroken);
+            return new Vehicle(serialNumber, weight, carryingCapacity, maxSpeed, cost, mileage, manufacturingTime, isBroken);
         }
 
         static int ChooseSpecific(Dictionary<int, Vehicle> vehicles)
