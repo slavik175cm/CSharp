@@ -11,7 +11,6 @@ namespace lab5
             vehicles[2] = new BMWX5("AB1010DC", 100);
             vehicles[3] = new LamborghiniAventador("DCS122", 100, new DateTime(2012, 1, 2), false, 80);
 
-            bool doClear = false;
             while (true)
             {
                 Console.WriteLine("1 to show all the vehicles");
@@ -24,30 +23,26 @@ namespace lab5
                     case 1:
                         Console.Clear();
                         ShowAll(vehicles);
-                        doClear = false;
                         break;
                     case 2:
                         Console.Clear();
                         vehicles[Vehicle.Id + 1] = AddNewVehicle(vehicles);
-                        Console.WriteLine("Vehicle has been added!");
-                        doClear = true;
+                        Console.WriteLine("\nCharacteristics of the new car\n");
+                        Console.WriteLine(vehicles[Vehicle.Id].InfoToString());
+                        Console.WriteLine("Vehicle has been added!\n");
                         break;
                     case 3:
                         DeleteVehicle(vehicles);
-                        doClear = true;
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
                     case 4:
-                        Console.Clear();
                         ChangeSome(vehicles);
-                        doClear = true;
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
                     case 5:
                         return;
-                }
-                Console.ReadLine();
-                if (doClear)
-                {
-                    Console.Clear();
                 }
             }
         }
@@ -81,11 +76,14 @@ namespace lab5
             if (vehicles.Count == 0)
             {
                 Console.WriteLine("There is no vehicles");
+                Console.ReadLine();
                 return;
             }
+            Console.WriteLine("******************************************************");
             foreach (var a in vehicles)
             {
                 Console.Write(a.Value.InfoToString());
+                Console.Write("******************************************************");
                 Console.ReadLine();
             }
         }
@@ -148,7 +146,6 @@ namespace lab5
 
         static Vehicle AddNewVehicle(Dictionary<int, Vehicle> vehicles)
         {
-             Console.WriteLine();
              Console.WriteLine("1 to add a new vehicle");
              Console.WriteLine("2 to add a new car");
              Console.WriteLine("3 to add a new BMWX5");
@@ -191,44 +188,46 @@ namespace lab5
 
         static int ChooseSpecific(Dictionary<int, Vehicle> vehicles)
         {
-            int choice;
+            Console.Write("Available vehicles: ");
+            foreach(var a in vehicles)
+            {
+                Console.Write(a.Key + " ");
+            }
+            Console.WriteLine();
             while (true)
             {
-                choice = Choice(0);
+                int choice = Choice();
                 if (vehicles.ContainsKey(choice))
                 {
                     return choice;
                 }
-                Console.WriteLine("There is no vehicle with such id! Type 'y' to continue...");
-                if (Console.ReadLine().ToLower() != "y")
-                {
-                    return -1;
-                }
+                Console.WriteLine("There is no such vehicle. Try again");
             }
         }
 
         static void DeleteVehicle(Dictionary<int, Vehicle> vehicles)
         {
-            Console.WriteLine("Choose the id of the vehicle you want to delete");
-            int index = ChooseSpecific(vehicles);
-            if (index == -1)
+            if (vehicles.Count == 0)
             {
-                Console.WriteLine("Nothing has been deleted");
+                Console.WriteLine("\nThere is no vehicles");
                 return;
             }
+            Console.WriteLine("\nChoose the id of the vehicle you want to delete");
+            int index = ChooseSpecific(vehicles);
             vehicles.Remove(index);
             Console.WriteLine("It has been removed!");
         }
 
         static void ChangeSome(Dictionary<int, Vehicle> vehicles)
         {
-            Console.WriteLine("Choose the id of the vehicle you want to change");
-            int index = ChooseSpecific(vehicles);
-            if (index == -1)
+            if (vehicles.Count == 0)
             {
-                Console.WriteLine("Nothing has been changed");
+                Console.WriteLine("\nThere is no vehicles");
                 return;
             }
+            Console.WriteLine("\nChoose the id of the vehicle you want to change");
+            int index = ChooseSpecific(vehicles);
+            Console.WriteLine();
             Console.WriteLine("1 to change the serial number");
             Console.WriteLine("2 to run some kilometers");
             Console.WriteLine("3 to repair/break the vehicle");

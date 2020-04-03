@@ -6,7 +6,7 @@ namespace lab5
 {
     class Vehicle
     {
-        public string SerialNumber { get; set; }
+        public string SerialNumber { get; protected set; }
         public double Weight { get; protected set; }
         public double CarryingCapacity { get; protected set; }
         public double MaxSpeed { get; protected set; }
@@ -71,7 +71,6 @@ namespace lab5
         public virtual string InfoToString()
         {
             StringBuilder info = new StringBuilder();
-            info.AppendLine("******************************************************");
             info.AppendLine($"Id: {MyId}");
             info.AppendLine($"Serial number: {SerialNumber}");
             info.AppendLine($"Weight: { Weight}kg");
