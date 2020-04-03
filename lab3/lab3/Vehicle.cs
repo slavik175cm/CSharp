@@ -38,27 +38,34 @@ namespace lab3
             IsBroken = isBroken;
         }
 
-        public bool ChangeSerialNumber(string newSerialNumber)
+        static public bool IsValidSerialNumber(string serialNumber)
         {
-            if (newSerialNumber.Length > 20)
+            if (serialNumber.Length > 20)
             {
                 return false;
             }
-            foreach(var ch in newSerialNumber)
+            foreach (var ch in serialNumber)
             {
                 if ((ch < 'A' || ch > 'Z') && (ch < '0' || ch > '9'))
                 {
                     return false;
                 }
             }
-            SerialNumber = newSerialNumber;
             return true;
+        }
+
+        public void ChangeSerialNumber(string newSerialNumber)
+        {
+            if (!IsValidSerialNumber(newSerialNumber))
+            {
+                return;
+            }
+            SerialNumber = newSerialNumber;
         }
 
         public string InfoToString()
         {
             StringBuilder info = new StringBuilder();
-            info.AppendLine("******************************************************");
             info.AppendLine($"Id: {MyId}");
             info.AppendLine($"Serial number: {SerialNumber}");
             info.AppendLine($"Weight: { Weight}kg");
