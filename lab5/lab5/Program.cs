@@ -137,7 +137,7 @@ namespace lab5
             }
             double mileage = ReadDouble("Mileage(m) - ");
             bool isBroken = false;
-            if (Choice(0, 1, "Is your vehicle new(1/0)? ") == 1)
+            if (Choice(0, 1, "Is your vehicle broken(1/0)? ") == 1)
             {
                 isBroken = true;
             }
