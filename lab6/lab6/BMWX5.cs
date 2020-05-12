@@ -21,7 +21,6 @@ namespace lab6
         public BMWX5(string serialNumber, double currentFuel, double currentEnergy)
             : base(serialNumber, currentFuel)
         {
-            CurrentEnergy = currentEnergy;
             Weight = 2190;
             CarryingCapacity = 710;
             MaxSpeed = 250;
@@ -35,6 +34,11 @@ namespace lab6
             if (CurrentFuel > MaxFuel)
             {
                 CurrentFuel = MaxFuel;
+            }
+            CurrentEnergy = currentEnergy;
+            if (CurrentEnergy > BatteryCapacity)
+            {
+                CurrentEnergy = BatteryCapacity;
             }
         }
 

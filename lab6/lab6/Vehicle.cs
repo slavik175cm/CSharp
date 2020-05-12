@@ -26,7 +26,7 @@ namespace lab6
         public DateTime ManufacturingTime { get; protected set; }
         public bool IsBroken { get; protected set; }
         public int MyId { get; protected set; }
-        public static int Id { get; set; } = 0;
+        public static int Id { get; protected set; } = 0;
 
         public Vehicle()
         {
