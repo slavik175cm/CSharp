@@ -1,0 +1,11 @@
+D:\C#\lab8\lab8\bin\Debug\netcoreapp3.1\lab8.exe
+D:\C#\lab8\lab8\bin\Debug\netcoreapp3.1\lab8.deps.json
+D:\C#\lab8\lab8\bin\Debug\netcoreapp3.1\lab8.runtimeconfig.json
+D:\C#\lab8\lab8\bin\Debug\netcoreapp3.1\lab8.runtimeconfig.dev.json
+D:\C#\lab8\lab8\bin\Debug\netcoreapp3.1\lab8.dll
+D:\C#\lab8\lab8\bin\Debug\netcoreapp3.1\lab8.pdb
+D:\C#\lab8\lab8\obj\Debug\netcoreapp3.1\lab8.csprojAssemblyReference.cache
+D:\C#\lab8\lab8\obj\Debug\netcoreapp3.1\lab8.AssemblyInfoInputs.cache
+D:\C#\lab8\lab8\obj\Debug\netcoreapp3.1\lab8.AssemblyInfo.cs
+D:\C#\lab8\lab8\obj\Debug\netcoreapp3.1\lab8.dll
+D:\C#\lab8\lab8\obj\Debug\netcoreapp3.1\lab8.pdb
